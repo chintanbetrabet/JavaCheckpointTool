@@ -1,0 +1,13 @@
+Will Call Checkpoint before println
+MID
+Will Call Checkpoint before forName
+Will Call Checkpoint before getConnection
+Will Call Checkpoint before log
+Will Call Checkpoint before hasNext
+Will Call Checkpoint before nextLine
+Will Call Checkpoint before split
+Will Call Checkpoint before println
+Your query was : Update user_details set status = 4 where user_id = 1
+Your command was :update
+Will Call Checkpoint before equals
+Will Call Checkpoint before prepareStatement

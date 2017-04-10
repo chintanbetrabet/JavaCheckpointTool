@@ -1,0 +1,232 @@
+RULE trace append entry
+CLASS java.lang.StringBuilder
+METHOD append
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace checkpoint entry
+CLASS edu.bitsgoa.xx.yy.CheckpointingTool.CheckpointJava
+METHOD checkpoint
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace close entry
+CLASS java.util.Scanner
+METHOD close
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace createStatement entry
+CLASS java.sql.Connection
+METHOD createStatement
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace equals entry
+CLASS java.lang.String
+METHOD equals
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace exec entry
+CLASS java.lang.Runtime
+METHOD exec
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace executeQuery entry
+CLASS java.sql.Statement
+METHOD executeQuery
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace executeUpdate entry
+CLASS java.sql.PreparedStatement
+METHOD executeUpdate
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace forName entry
+CLASS java.lang.Class
+METHOD forName
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace getConnection entry
+CLASS java.sql.DriverManager
+METHOD getConnection
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace getInputStream entry
+CLASS java.lang.Process
+METHOD getInputStream
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace getInt entry
+CLASS java.sql.ResultSet
+METHOD getInt
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace getLogger entry
+CLASS java.util.logging.Logger
+METHOD getLogger
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace getName entry
+CLASS java.lang.Class
+METHOD getName
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace getRuntime entry
+CLASS java.lang.Runtime
+METHOD getRuntime
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace getString entry
+CLASS java.sql.ResultSet
+METHOD getString
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace hasNext entry
+CLASS java.util.Scanner
+METHOD hasNext
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace log entry
+CLASS java.util.logging.Logger
+METHOD log
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace next entry
+CLASS java.sql.ResultSet
+METHOD next
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace nextLine entry
+CLASS java.util.Scanner
+METHOD nextLine
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace prepareStatement entry
+CLASS java.sql.Connection
+METHOD prepareStatement
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace printProcessOutput entry
+CLASS edu.bitsgoa.xx.yy.CheckpointingTool.CheckpointJava
+METHOD printProcessOutput
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace printStackTrace entry
+CLASS java.lang.Exception
+METHOD printStackTrace
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace println entry
+CLASS java.io.PrintStream
+METHOD println
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace readLine entry
+CLASS java.io.BufferedReader
+METHOD readLine
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace runProcess entry
+CLASS edu.bitsgoa.xx.yy.CheckpointingTool.CheckpointJava
+METHOD runProcess
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace split entry
+CLASS java.lang.String
+METHOD split
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace toLowerCase entry
+CLASS java.lang.String
+METHOD toLowerCase
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
+RULE trace toString entry
+CLASS java.lang.StringBuilder
+METHOD toString
+HELPER Parasite
+AT ENTRY
+IF true
+DO signal(0.7)
+ENDRULE
