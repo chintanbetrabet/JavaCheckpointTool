@@ -6,14 +6,17 @@
 package edu.bitsgoa.xx.yy.CheckpointingTool;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.logging.Level;
@@ -187,25 +190,35 @@ public class BinaryInstrumenterCheckpoint {
 
     public static void main(String args[]) {
 
-        String jarName = "/home/chintan/Downloads/SOP/FinalProjectStructure/Test/dist/Test.jar";
-        String callgraphFile = "callg1";
-        String callgraphCreateCommand = "java -jar /home/chintan/Downloads/SOP/FinalProjectStructure/JavaCheckpointingTool/libs/java-callgraph/target/javacg-0.1-SNAPSHOT-static.jar ";
-        String destination = "/home/chintan/Downloads/SOP/FinalProjectStructure/JavaCheckpointingTool/output";
+        Scanner configScanner = null;
+        try {
+            configScanner = new Scanner(new File("../config/docs.config"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(BinaryInstrumenterCheckpoint.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        HashMap<String,String> configMap=new HashMap<>();
+        while(configScanner.hasNext())
+        {
+            String configData=configScanner.nextLine();
+            String key,value;
+            key=configData.split(":")[0];
+            value=configData.split(":")[1];
+            configMap.put(key, value);
+        }
+        System.out.println(configMap);
+        String jarName = configMap.get("JAR_PATH");
+        String callgraphFile = "callgraph_output";
+        String callgraphCreateCommand = configMap.get("CALLGRAPH_LOCATION");
+        String destination = configMap.get("OUTPUT_LOCATION");
         //String checkpointCode = readFileToString("../config/checkpointCodeJava");
-        String checkpointCommand = "/home/chintan/Downloads/SOP/FinalProjectStructure/JavaCheckpointingTool/libs/dmtcp/test/plugin/chkptplugin %s";
-
-        //System.out.println(checkpointCode);
+        String checkpointCommand = configMap.get("CHECKPOINT_COMMAND");
+        
+        
         String checkpointCode = "try"
                 + "        {"
                 + "         System.out.println(\"I want a CHKPT after \");"
                 + "        String command = \"%s\";"
                 + "        Process process = Runtime.getRuntime().exec(command);process.waitFor();"
-                //  + "java.io.BufferedReader buffer = new java.io.BufferedReader(new java.io.InputStreamReader(process.getInputStream()));"
-                // + "String line=\"\";\n"
-                //+ "			while((line=buffer.readLine())!=null)\n"
-                //+ "			{\n"
-                //+ "				System.out.println(line);\n"
-                //+ "			}"
                 + "        } catch (java.io.IOException ex) {"
                 + "            System.out.println(\"Glitch\");"
                 + "        }"
@@ -221,7 +234,7 @@ public class BinaryInstrumenterCheckpoint {
         } catch (NotFoundException ex) {
             Logger.getLogger(BinaryInstrumenterCheckpoint.class.getName()).log(Level.SEVERE, null, ex);
         }
-        writeSystemCommandToFile(runProcess(callgraphCreateCommand + jarName), callgraphFile);
+        writeSystemCommandToFile(runProcess(callgraphCreateCommand + " "+jarName), callgraphFile);
         modifyJarUsingCallGraph(pool, callgraphFile, destination, checkpointCode, jarName);
         System.out.println("Finished");
     }

@@ -22,7 +22,10 @@ import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
 
 public class MethodFinder {
-
+    public static void main(String a[])
+    {
+        BinaryInstrumenterCheckpoint.main(null);
+    }
     public static void modifyCalledMethodsFromMethod(CtClass ctClass, ClassPool cp, CtMethod method, String destination, String checkpointingCode, String jarName) {
         try {
             ctClass.defrost();
@@ -46,16 +49,36 @@ public class MethodFinder {
                     //m.getMethod().get
                     //ctClass.defrost();
                     // System.out.println(m.getMethodName()+" "+m.getLineNumber());
-                    if(m.getMethodName().equals("executeUpdate"))
+                    
+                    if(m.getMethodName().equals("createStatement"))
                     {
-                        System.out.println("GOT update command ");
-                        m.replace("System.out.println(\"Called by \" + $0);$_ = $proceed($$);");
+                        m.replace("java.sql.Connection con1 = null;"
+                                + "con1=java.sql.DriverManager.getConnection(  \"jdbc:mysql://localhost:3306/LARGE?autoReconnect=true\",\"root\",\"J!4192chb\");"
+                                + "$0=con1;"
+                                
+                                
+                                + "$_ = $proceed($$);");
+                    }
+                   else if(m.getMethodName().equals("prepareStatement"))
+                    {
+                        m.replace("java.sql.Connection con1 = null;"
+                               + "con1=java.sql.DriverManager.getConnection( \"jdbc:mysql://localhost:3306/LARGE?autoReconnect=true\",\"root\",\"J!4192chb\");"
+                                + "$0=con1;"
+                                
+                                
+                                + "$_ = $proceed($$);");
+                    }
+                    
+                    else if (m.getMethodName().equals("executeUpdate"))
+                    {
+                        //System.out.println("GOT update command ");
+                        m.replace("$_ = $proceed($$);");
                     }
                     else if (m.getClassName().equals("java.sql.DriverManager")
                             && m.getMethodName().equals("getConnection")) {
-                        System.out.println("Found method");
+                        //System.out.println("Found method");
 
-                        /* m.replace("{long startMs = System.currentTimeMillis(); " +
+                        /*m.replace("{long startMs = System.currentTimeMillis(); " +
             "$_ = $proceed($$); " +
             "long endMs = System.currentTimeMillis();" +
             "System.out.println(\"Executed in ms: \" + (endMs-startMs));}");*/
@@ -68,7 +91,7 @@ public class MethodFinder {
                                 + "    }\n"
                                 + "    else\n"
                                 + "    {\n"
-                                + "        s=s+\"?&&autoReconnect=true&&maxReconnects=3\";\n"
+                                + "        s=s+\"?autoReconnect=true&&maxReconnects=3\";\n"
                                 + "    }\n"
                                 + "}\n"
                                 + "$1=s;"

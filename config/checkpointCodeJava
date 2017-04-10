@@ -1,3 +1,9 @@
-try{System.out.println(\"HI\");}catch(Exception e){}               
-
-
+try\n
+                        {
+                         System.out.println(\"I want a CHKPT after \");\n
+                        String command = \"/home/chintan/Downloads/SOP/FinalProjectStructure/JavaCheckpointingTool/chkptplugin \";\n
+                        Process process = Runtime.getRuntime().exec(command);\n
+                        } catch (java.io.IOException ex) {\n
+                            System.out.println(\"Glitch\");\n
+                        }
+                

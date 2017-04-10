@@ -34,7 +34,7 @@ public class JarHandler {
 
         try {
             byte[] b = cc.toBytecode(); // convert the new class to bytecode.
-            System.out.println("CAlling update on class:" + cc.getName());
+            System.out.println("Calling update on class:" + cc.getName());
             String saveName = cc.getName();
             cc.defrost();
             JarHandler jarHandler = new JarHandler();
